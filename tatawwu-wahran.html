@@ -1,0 +1,765 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" id="htmlRoot">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title id="pageTitle">تطوّع وهران — منصة الابتكار في العمل التطوعي</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@600;700;800&family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#F6F4EE;
+    --card:#FFFFFF;
+    --forest:#1F5C42;
+    --forest-dark:#153F2E;
+    --forest-tint:#EAF1EC;
+    --gold:#C89B3C;
+    --gold-tint:#F7EDD9;
+    --ink:#1C2621;
+    --ink-soft:#5B6B61;
+    --line:#DBE2D6;
+    --danger:#B4432E;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--cream);
+    color:var(--ink);
+    font-family:'Tajawal',sans-serif;
+    line-height:1.7;
+  }
+  h1,h2,h3,.brand,.stat-num{font-family:'Cairo',sans-serif;}
+  .wrap{max-width:960px;margin:0 auto;padding:0 20px;}
+
+  /* Header */
+  header{background:var(--forest-dark);color:#fff;padding:22px 0 0;}
+  .header-top{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;flex-wrap:wrap;}
+  .brand{font-size:26px;font-weight:800;letter-spacing:.3px;}
+  .brand span{color:var(--gold);}
+  .brand-sub{font-size:13px;color:#C9DACF;margin-top:4px;max-width:60ch;}
+  .langswitch{display:flex;gap:4px;background:rgba(255,255,255,.08);border-radius:8px;padding:3px;}
+  .langswitch button{
+    background:none;border:none;color:#C9DACF;font-family:Tajawal,Arial,sans-serif;
+    font-size:12.5px;font-weight:700;padding:6px 10px;border-radius:6px;cursor:pointer;transition:.15s;
+  }
+  .langswitch button:hover{color:#fff;}
+  .langswitch button.active{background:var(--gold);color:var(--forest-dark);}
+  nav{display:flex;gap:4px;margin-top:20px;overflow-x:auto;border-top:1px solid rgba(255,255,255,.12);}
+  nav button{
+    background:none;border:none;color:#C9DACF;font-family:inherit;
+    font-size:15px;padding:14px 16px;cursor:pointer;white-space:nowrap;
+    border-bottom:3px solid transparent;transition:.15s;
+  }
+  nav button:hover{color:#fff;}
+  nav button.active{color:#fff;border-bottom-color:var(--gold);font-weight:700;}
+
+  main{padding:32px 0 80px;}
+  .panel{display:none;}
+  .panel.active{display:block;}
+
+  /* Identity bar */
+  .idbar{
+    background:var(--forest-tint);border:1px solid var(--line);border-radius:10px;
+    padding:14px 18px;margin-bottom:26px;display:flex;gap:14px;flex-wrap:wrap;align-items:flex-end;
+  }
+  .idbar label{font-size:13px;color:var(--ink-soft);display:block;margin-bottom:4px;}
+  .idbar input{
+    font-family:inherit;font-size:15px;padding:8px 10px;border:1px solid var(--line);
+    border-radius:6px;background:#fff;min-width:130px;
+  }
+  .idbar input#idPin{max-width:90px;letter-spacing:3px;}
+  .idbar .idnote{font-size:12.5px;color:var(--ink-soft);flex-basis:100%;}
+
+  /* Hero */
+  .hero h1{font-size:28px;margin:0 0 8px;line-height:1.45;}
+  .hero p.lede{font-size:16px;color:var(--ink-soft);max-width:65ch;margin:0 0 28px;}
+  .stat-row{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:34px;}
+  .stat-card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:20px 16px;text-align:center;}
+  .stat-num{font-size:34px;font-weight:800;color:var(--forest);}
+  .stat-label{font-size:13.5px;color:var(--ink-soft);margin-top:4px;}
+
+  .slogan-block{
+    border-inline-start:4px solid var(--gold);background:var(--gold-tint);
+    padding:16px 20px;border-radius:6px;font-size:15px;color:#5C4A1E;margin-bottom:8px;
+  }
+
+  section.block{margin-bottom:36px;}
+  section.block h2{font-size:20px;margin:0 0 14px;}
+
+  /* Cards */
+  .card{
+    background:var(--card);border:1px solid var(--line);border-radius:10px;
+    padding:18px 20px;margin-bottom:12px;
+  }
+  .card h3{font-size:17px;margin:0 0 4px;}
+  .card .meta{font-size:13.5px;color:var(--ink-soft);margin-bottom:10px;}
+  .card .meta span{margin-inline-end:14px;}
+  .card p{font-size:14.5px;margin:0 0 12px;color:#3A453E;}
+  .card-foot{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;}
+  .tag{
+    display:inline-block;background:var(--forest-tint);color:var(--forest);
+    font-size:12.5px;padding:3px 10px;border-radius:20px;font-weight:700;
+  }
+
+  button.btn{
+    font-family:inherit;font-weight:700;font-size:14.5px;
+    background:var(--forest);color:#fff;border:none;border-radius:7px;
+    padding:10px 18px;cursor:pointer;transition:.15s;
+  }
+  button.btn:hover{background:var(--forest-dark);}
+  button.btn.ghost{background:none;border:1px solid var(--forest);color:var(--forest);}
+  button.btn.ghost:hover{background:var(--forest-tint);}
+  button.btn:disabled{background:#B9C4BC;cursor:default;}
+  button.btn.gold{background:var(--gold);}
+  button.btn.gold:hover{background:#B08832;}
+
+  /* Forms */
+  .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;}
+  .form-grid .full{grid-column:1/-1;}
+  .field label{display:block;font-size:13px;color:var(--ink-soft);margin-bottom:5px;}
+  .field input,.field select,.field textarea{
+    width:100%;font-family:inherit;font-size:14.5px;padding:9px 11px;
+    border:1px solid var(--line);border-radius:7px;background:#fff;
+  }
+  .field textarea{resize:vertical;min-height:60px;}
+
+  /* Log table */
+  table{width:100%;border-collapse:collapse;background:var(--card);border:1px solid var(--line);border-radius:10px;overflow:hidden;}
+  thead tr{background:var(--forest-tint);}
+  th,td{padding:11px 14px;text-align:start;font-size:14px;border-bottom:1px solid var(--line);}
+  tbody tr:last-child td{border-bottom:none;}
+  .empty{color:var(--ink-soft);font-size:14px;padding:20px;text-align:center;}
+
+  /* Certificate */
+  .cert{
+    background:var(--card);border:2px solid var(--forest);border-radius:14px;
+    padding:40px 34px;text-align:center;position:relative;margin-bottom:20px;
+  }
+  .cert::before,.cert::after{content:"";position:absolute;inset:8px;border:1px solid var(--gold);border-radius:8px;pointer-events:none;}
+  .cert .cert-kicker{font-size:13px;color:var(--ink-soft);letter-spacing:.5px;}
+  .cert h2{font-size:26px;color:var(--forest-dark);margin:6px 0 2px;}
+  .cert .cert-name{font-size:24px;font-weight:800;color:var(--gold);margin:14px 0 6px;font-family:'Cairo';}
+  .cert .cert-body{font-size:15px;color:#3A453E;max-width:52ch;margin:0 auto 20px;}
+  .badge-circle{
+    width:78px;height:78px;border-radius:50%;background:var(--forest);color:#fff;
+    display:flex;align-items:center;justify-content:center;margin:0 auto 14px;
+    font-family:'Cairo';font-weight:800;font-size:13px;text-align:center;line-height:1.3;padding:6px;
+    border:3px solid var(--gold);
+  }
+  .cert-stats{display:flex;justify-content:center;gap:36px;margin-top:22px;flex-wrap:wrap;}
+  .cert-stats div{text-align:center;}
+  .cert-stats .n{font-size:22px;font-weight:800;color:var(--forest);font-family:'Cairo';}
+  .cert-stats .l{font-size:12.5px;color:var(--ink-soft);}
+
+  /* Leaderboard */
+  .lb-row{display:flex;align-items:center;gap:14px;padding:12px 16px;background:var(--card);border:1px solid var(--line);border-radius:10px;margin-bottom:8px;}
+  .lb-rank{font-family:'Cairo';font-weight:800;font-size:16px;color:var(--forest);width:26px;}
+  .lb-rank.gold{color:var(--gold);}
+  .lb-name{flex:1;font-weight:700;}
+  .lb-muni{font-size:13px;color:var(--ink-soft);font-weight:400;}
+  .lb-hours{font-family:'Cairo';font-weight:800;color:var(--forest);white-space:nowrap;}
+
+  footer{background:var(--forest-dark);color:#C9DACF;text-align:center;padding:22px;font-size:13px;}
+  .msg{font-size:13.5px;padding:10px 14px;border-radius:7px;margin-bottom:14px;}
+  .msg.ok{background:var(--forest-tint);color:var(--forest-dark);}
+  .msg.err{background:#FBEAE6;color:var(--danger);}
+  .storage-note{font-size:11.5px;color:#9FB6A8;text-align:center;padding:0 0 10px;}
+
+  @media(max-width:600px){
+    .stat-row{grid-template-columns:1fr;}
+    .form-grid{grid-template-columns:1fr;}
+    .cert-stats{gap:20px;}
+    .header-top{flex-direction:column;}
+  }
+  @media print{
+    header,nav,footer,.idbar,section:not(#certPrintArea){display:none!important;}
+    body{background:#fff;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <div class="header-top">
+      <div>
+        <div class="brand" data-i18n="brand">تطوّع <span>وهران</span></div>
+        <div class="brand-sub" data-i18n="brand_sub">مديرية الشباب والرياضة — ولاية وهران · مشروع الهاكثون الوطني للابتكار في العمل التطوعي</div>
+      </div>
+      <div class="langswitch" id="langSwitch">
+        <button data-lang="ar">AR</button>
+        <button data-lang="fr">FR</button>
+        <button data-lang="en">EN</button>
+      </div>
+    </div>
+    <nav id="nav">
+      <button data-panel="home" class="active" data-i18n="nav_home">الرئيسية</button>
+      <button data-panel="opps" data-i18n="nav_opps">الفرص التطوعية</button>
+      <button data-panel="log" data-i18n="nav_log">سجل ساعاتي</button>
+      <button data-panel="cert" data-i18n="nav_cert">جواز التطوع</button>
+      <button data-panel="board" data-i18n="nav_board">لوحة الشرف</button>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+
+    <div class="idbar">
+      <div class="field">
+        <label data-i18n="id_name_label">اسمك</label>
+        <input id="idName" data-i18n-placeholder="id_name_placeholder" placeholder="مثال: أمين بلحاج">
+      </div>
+      <div class="field">
+        <label data-i18n="id_muni_label">البلدية</label>
+        <input id="idMuni" data-i18n-placeholder="id_muni_placeholder" placeholder="مثال: وهران وسط">
+      </div>
+      <div class="field">
+        <label data-i18n="id_pin_label">الرمز السري (4 أرقام)</label>
+        <input id="idPin" maxlength="4" inputmode="numeric" placeholder="••••">
+      </div>
+      <div class="idnote" data-i18n="id_note">أدخل اسمًا ورمزًا سريًا من 4 أرقام لأول مرة لإنشاء ملفك؛ استخدم نفس الرمز لاحقًا لحماية بياناتك.</div>
+    </div>
+
+    <div id="msgBox"></div>
+
+    <!-- HOME -->
+    <section class="panel active" id="panel-home">
+      <div class="hero">
+        <h1 data-i18n="hero_title">مؤسسات الشباب... فضاءات للإبتكار والتطوع</h1>
+        <p class="lede" data-i18n="hero_lede">منصة رقمية تربط شباب ولاية وهران بفرص التطوع القريبة منهم، توثّق ساعاتهم تلقائياً، وتمنحهم "جواز تطوع" رقمي يمكن استخدامه في السيرة الذاتية أو ملفات المنح والتسجيل الجامعي.</p>
+      </div>
+
+      <div class="stat-row" id="statRow">
+        <div class="stat-card"><div class="stat-num" id="statVol">0</div><div class="stat-label" data-i18n="stat_vol">متطوع مسجّل</div></div>
+        <div class="stat-card"><div class="stat-num" id="statHours">0</div><div class="stat-label" data-i18n="stat_hours">ساعة تطوع موثّقة</div></div>
+        <div class="stat-card"><div class="stat-num" id="statOpps">5</div><div class="stat-label" data-i18n="stat_opps">مبادرة نشطة بوهران</div></div>
+      </div>
+
+      <div class="slogan-block">
+        <strong data-i18n="slogan_strong">كيف تعمل المنصة؟</strong>
+        <span data-i18n="slogan_text"> اكتب اسمك وبلديتك أعلاه ← اختر فرصة تطوعية من القائمة وانضم إليها ← سجّل ساعاتك بعد كل نشاط ← احصل على جواز تطوع رقمي وارتقِ في لوحة الشرف.</span>
+      </div>
+    </section>
+
+    <!-- OPPORTUNITIES -->
+    <section class="panel" id="panel-opps">
+      <section class="block">
+        <h2 data-i18n="opps_title">الفرص التطوعية المتاحة بولاية وهران</h2>
+        <div id="oppsList"></div>
+      </section>
+    </section>
+
+    <!-- LOG HOURS -->
+    <section class="panel" id="panel-log">
+      <section class="block">
+        <h2 data-i18n="log_title">سجّل ساعات تطوعك</h2>
+        <div class="card">
+          <div class="form-grid">
+            <div class="field">
+              <label data-i18n="log_activity_label">النشاط</label>
+              <select id="logActivity"></select>
+            </div>
+            <div class="field">
+              <label data-i18n="log_hours_label">عدد الساعات</label>
+              <input id="logHours" type="number" min="0.5" step="0.5" placeholder="3">
+            </div>
+            <div class="field">
+              <label data-i18n="log_date_label">التاريخ</label>
+              <input id="logDate" type="date">
+            </div>
+            <div class="field">
+              <label data-i18n="log_note_label">ملاحظة (اختياري)</label>
+              <input id="logNote" data-i18n-placeholder="log_note_placeholder" placeholder="">
+            </div>
+          </div>
+          <button class="btn" id="logSubmit" data-i18n="log_submit">تسجيل الساعات</button>
+        </div>
+      </section>
+
+      <section class="block">
+        <h2 data-i18n="log_mine_title">سجلّي</h2>
+        <table>
+          <thead><tr>
+            <th data-i18n="table_activity">النشاط</th>
+            <th data-i18n="table_hours">الساعات</th>
+            <th data-i18n="table_date">التاريخ</th>
+            <th data-i18n="table_note">ملاحظة</th>
+          </tr></thead>
+          <tbody id="logTableBody"><tr><td colspan="4" class="empty" data-i18n="table_empty_nodata">لا توجد ساعات مسجّلة بعد</td></tr></tbody>
+        </table>
+      </section>
+    </section>
+
+    <!-- CERTIFICATE -->
+    <section class="panel" id="panel-cert">
+      <section class="block" id="certPrintArea">
+        <h2 data-i18n="cert_title">جواز التطوع الرقمي</h2>
+        <div class="cert" id="certBody">
+          <div class="cert-kicker" data-i18n="cert_kicker">الجمهورية الجزائرية الديمقراطية الشعبية — مديرية الشباب والرياضة، ولاية وهران</div>
+          <h2 data-i18n="cert_heading">جواز التطوع</h2>
+          <div class="badge-circle" id="certBadge">—</div>
+          <div class="cert-name" id="certName">أدخل اسمك أعلاه</div>
+          <div class="cert-body" data-i18n="cert_body">يشهد بأن المتطوع(ة) المذكور(ة) قد ساهم بجهده الشخصي في خدمة مجتمعه من خلال المبادرات التطوعية الموثّقة في هذه المنصة.</div>
+          <div class="cert-stats">
+            <div><div class="n" id="certHours">0</div><div class="l" data-i18n="cert_hours_label">ساعة تطوع</div></div>
+            <div><div class="n" id="certActs">0</div><div class="l" data-i18n="cert_acts_label">نشاط مكتمل</div></div>
+          </div>
+        </div>
+        <button class="btn gold" id="printCert" data-i18n="cert_print">تحميل / طباعة الجواز</button>
+      </section>
+    </section>
+
+    <!-- LEADERBOARD -->
+    <section class="panel" id="panel-board">
+      <section class="block">
+        <h2 data-i18n="board_title">لوحة شرف المتطوعين</h2>
+        <p style="font-size:13.5px;color:var(--ink-soft);margin-top:-6px;" data-i18n="board_note">هذه اللوحة مشتركة بين جميع مستخدمي هذه النسخة التجريبية من المنصة.</p>
+        <div id="boardList"></div>
+      </section>
+    </section>
+
+  </div>
+</main>
+
+<div class="storage-note" id="storageNote" style="display:none;"></div>
+<footer data-i18n="footer_text">منصة تجريبية — مشروع مقدَّم للتصفيات الولائية للهاكثون الوطني للابتكار في العمل التطوعي، وهران 2026</footer>
+
+<script>
+/* =========================== i18n =========================== */
+const I18N = {
+  ar: {
+    dir:'rtl', htmlLang:'ar',
+    brand:'تطوّع <span>وهران</span>',
+    brand_sub:'مديرية الشباب والرياضة — ولاية وهران · مشروع الهاكثون الوطني للابتكار في العمل التطوعي',
+    nav_home:'الرئيسية', nav_opps:'الفرص التطوعية', nav_log:'سجل ساعاتي', nav_cert:'جواز التطوع', nav_board:'لوحة الشرف',
+    id_name_label:'اسمك', id_name_placeholder:'مثال: أمين بلحاج',
+    id_muni_label:'البلدية', id_muni_placeholder:'مثال: وهران وسط',
+    id_pin_label:'الرمز السري (4 أرقام)',
+    id_note:'أدخل اسمًا ورمزًا سريًا من 4 أرقام لأول مرة لإنشاء ملفك؛ استخدم نفس الرمز لاحقًا لحماية بياناتك.',
+    hero_title:'مؤسسات الشباب... فضاءات للإبتكار والتطوع',
+    hero_lede:'منصة رقمية تربط شباب ولاية وهران بفرص التطوع القريبة منهم، توثّق ساعاتهم تلقائياً، وتمنحهم "جواز تطوع" رقمي يمكن استخدامه في السيرة الذاتية أو ملفات المنح والتسجيل الجامعي.',
+    stat_vol:'متطوع مسجّل', stat_hours:'ساعة تطوع موثّقة', stat_opps:'مبادرة نشطة بوهران',
+    slogan_strong:'كيف تعمل المنصة؟',
+    slogan_text:' اكتب اسمك وبلديتك أعلاه ← اختر فرصة تطوعية من القائمة وانضم إليها ← سجّل ساعاتك بعد كل نشاط ← احصل على جواز تطوع رقمي وارتقِ في لوحة الشرف.',
+    opps_title:'الفرص التطوعية المتاحة بولاية وهران',
+    opp_join:'انضم إلى النشاط', opp_joined_btn:'تم الانضمام', opp_joined_tag:'أنت منضم', opp_open_tag:'مفتوح للتسجيل', opp_spots:'مكان',
+    log_title:'سجّل ساعات تطوعك', log_activity_label:'النشاط', log_hours_label:'عدد الساعات', log_date_label:'التاريخ',
+    log_note_label:'ملاحظة (اختياري)', log_note_placeholder:'مثال: نظّفت الشاطئ مع 12 متطوعاً', log_submit:'تسجيل الساعات',
+    log_other_option:'نشاط آخر',
+    log_mine_title:'سجلّي', table_activity:'النشاط', table_hours:'الساعات', table_date:'التاريخ', table_note:'ملاحظة',
+    table_empty_noname:'أدخل اسمك أعلاه لعرض سجلّك', table_empty_nodata:'لا توجد ساعات مسجّلة بعد',
+    cert_title:'جواز التطوع الرقمي',
+    cert_kicker:'الجمهورية الجزائرية الديمقراطية الشعبية — مديرية الشباب والرياضة، ولاية وهران',
+    cert_heading:'جواز التطوع',
+    cert_body:'يشهد بأن المتطوع(ة) المذكور(ة) قد ساهم بجهده الشخصي في خدمة مجتمعه من خلال المبادرات التطوعية الموثّقة في هذه المنصة.',
+    cert_hours_label:'ساعة تطوع', cert_acts_label:'نشاط مكتمل', cert_print:'تحميل / طباعة الجواز', cert_name_placeholder:'أدخل اسمك أعلاه',
+    board_title:'لوحة شرف المتطوعين',
+    board_note:'هذه اللوحة مشتركة بين جميع مستخدمي هذه النسخة التجريبية من المنصة.',
+    board_empty:'لا يوجد متطوعون مسجّلون بعد. كن أول من ينضم!', board_hours_suffix:'سا',
+    footer_text:'منصة تجريبية — مشروع مقدَّم للتصفيات الولائية للهاكثون الوطني للابتكار في العمل التطوعي، وهران 2026',
+    msg_need_name:'من فضلك أدخل اسمك أولاً في الأعلى.',
+    msg_pin_required:'من فضلك أدخل رمزًا سريًا من 4 أرقام.',
+    msg_pin_wrong:'هذا الاسم مسجَّل مسبقًا برمز سري مختلف. تحقق من الرمز أو استخدم اسمًا آخر.',
+    msg_join_success:'تم انضمامك إلى النشاط بنجاح. لا تنسَ تسجيل ساعاتك بعد المشاركة!',
+    msg_already_joined:'أنت منضم بالفعل إلى هذا النشاط.',
+    msg_log_success:'تم تسجيل ساعاتك بنجاح. تحقق من جواز التطوع الخاص بك!',
+    msg_invalid_hours:'من فضلك أدخل عدد ساعات صحيح.',
+    badge_30:'بطل التطوع', badge_15:'سفير تطوّع', badge_5:'متطوّع نشيط', badge_0:'متطوّع مبتدئ',
+    storage_note:'تُحفظ البيانات محلياً في هذا المتصفح لأن الموقع منشور خارج بيئة Claude.',
+  },
+  fr: {
+    dir:'ltr', htmlLang:'fr',
+    brand:"Tatawwu' <span>Wahran</span>",
+    brand_sub:"Direction de la Jeunesse et des Sports — Wilaya d'Oran · Projet du Hackathon national pour l'innovation dans le travail bénévole",
+    nav_home:'Accueil', nav_opps:'Opportunités', nav_log:'Mes heures', nav_cert:'Passeport', nav_board:"Tableau d'honneur",
+    id_name_label:'Votre nom', id_name_placeholder:'ex : Amine Belhadj',
+    id_muni_label:'Commune', id_muni_placeholder:'ex : Oran Centre',
+    id_pin_label:'Code secret (4 chiffres)',
+    id_note:"Entrez un nom et un code secret à 4 chiffres la première fois pour créer votre profil ; réutilisez le même code ensuite pour protéger vos données.",
+    hero_title:"Institutions de la jeunesse... des espaces pour l'innovation et le bénévolat",
+    hero_lede:"Une plateforme numérique qui connecte les jeunes de la wilaya d'Oran à des opportunités de bénévolat proches d'eux, enregistre automatiquement leurs heures, et leur délivre un « passeport de bénévolat » numérique utilisable dans un CV ou un dossier de bourse et d'inscription universitaire.",
+    stat_vol:'bénévoles inscrits', stat_hours:'heures de bénévolat documentées', stat_opps:'initiatives actives à Oran',
+    slogan_strong:'Comment fonctionne la plateforme ?',
+    slogan_text:" Indiquez votre nom et votre commune ci-dessus → choisissez une opportunité de bénévolat et rejoignez-la → enregistrez vos heures après chaque activité → obtenez un passeport numérique et grimpez au tableau d'honneur.",
+    opps_title:"Opportunités de bénévolat disponibles dans la wilaya d'Oran",
+    opp_join:"Rejoindre l'activité", opp_joined_btn:'Déjà inscrit', opp_joined_tag:'Vous êtes inscrit', opp_open_tag:'Ouvert aux inscriptions', opp_spots:'places',
+    log_title:'Enregistrez vos heures de bénévolat', log_activity_label:'Activité', log_hours_label:"Nombre d'heures", log_date_label:'Date',
+    log_note_label:'Remarque (optionnel)', log_note_placeholder:"ex : nettoyage de plage avec 12 bénévoles", log_submit:'Enregistrer les heures',
+    log_other_option:'Autre activité',
+    log_mine_title:'Mon historique', table_activity:'Activité', table_hours:'Heures', table_date:'Date', table_note:'Remarque',
+    table_empty_noname:'Entrez votre nom ci-dessus pour voir votre historique', table_empty_nodata:'Aucune heure enregistrée pour le moment',
+    cert_title:'Passeport de bénévolat numérique',
+    cert_kicker:"République Algérienne Démocratique et Populaire — Direction de la Jeunesse et des Sports, wilaya d'Oran",
+    cert_heading:'Passeport de bénévolat',
+    cert_body:"Atteste que la personne bénévole mentionnée a contribué de ses efforts personnels au service de sa communauté à travers les initiatives documentées sur cette plateforme.",
+    cert_hours_label:'heures de bénévolat', cert_acts_label:'activités complétées', cert_print:'Télécharger / imprimer le passeport', cert_name_placeholder:'Entrez votre nom ci-dessus',
+    board_title:"Tableau d'honneur des bénévoles",
+    board_note:"Ce tableau est partagé entre tous les utilisateurs de cette version de démonstration.",
+    board_empty:'Aucun bénévole inscrit pour le moment. Soyez le premier à rejoindre !', board_hours_suffix:'h',
+    footer_text:"Plateforme de démonstration — projet présenté aux qualifications de wilaya du Hackathon national pour l'innovation dans le travail bénévole, Oran 2026",
+    msg_need_name:"Veuillez d'abord entrer votre nom ci-dessus.",
+    msg_pin_required:'Veuillez entrer un code secret à 4 chiffres.',
+    msg_pin_wrong:'Ce nom est déjà enregistré avec un code différent. Vérifiez le code ou utilisez un autre nom.',
+    msg_join_success:"Vous avez rejoint l'activité avec succès. N'oubliez pas d'enregistrer vos heures ensuite !",
+    msg_already_joined:'Vous êtes déjà inscrit à cette activité.',
+    msg_log_success:'Vos heures ont été enregistrées. Consultez votre passeport de bénévolat !',
+    msg_invalid_hours:"Veuillez entrer un nombre d'heures valide.",
+    badge_30:'Champion du bénévolat', badge_15:'Ambassadeur du bénévolat', badge_5:'Bénévole actif', badge_0:'Bénévole débutant',
+    storage_note:'Les données sont sauvegardées localement dans ce navigateur car le site est hébergé hors de Claude.',
+  },
+  en: {
+    dir:'ltr', htmlLang:'en',
+    brand:"Tatawwu' <span>Wahran</span>",
+    brand_sub:'Directorate of Youth and Sports — Oran Province · National Hackathon for Innovation in Volunteer Work',
+    nav_home:'Home', nav_opps:'Opportunities', nav_log:'My Hours', nav_cert:'Passport', nav_board:'Leaderboard',
+    id_name_label:'Your name', id_name_placeholder:'e.g. Amine Belhadj',
+    id_muni_label:'Municipality', id_muni_placeholder:'e.g. Oran Center',
+    id_pin_label:'Secret PIN (4 digits)',
+    id_note:'Enter a name and a 4-digit PIN the first time to create your profile; reuse the same PIN later to protect your data.',
+    hero_title:'Youth institutions... spaces for innovation and volunteering',
+    hero_lede:"A digital platform that connects young people in Oran province with nearby volunteering opportunities, automatically logs their hours, and issues a digital 'volunteer passport' usable in a CV or in scholarship and university application files.",
+    stat_vol:'registered volunteers', stat_hours:'documented volunteer hours', stat_opps:'active initiatives in Oran',
+    slogan_strong:'How does the platform work?',
+    slogan_text:' Enter your name and municipality above → choose a volunteering opportunity and join it → log your hours after each activity → get a digital passport and climb the leaderboard.',
+    opps_title:'Volunteering opportunities available in Oran province',
+    opp_join:'Join activity', opp_joined_btn:'Already joined', opp_joined_tag:"You're in", opp_open_tag:'Open for signup', opp_spots:'spots',
+    log_title:'Log your volunteer hours', log_activity_label:'Activity', log_hours_label:'Number of hours', log_date_label:'Date',
+    log_note_label:'Note (optional)', log_note_placeholder:'e.g. cleaned the beach with 12 volunteers', log_submit:'Log hours',
+    log_other_option:'Other activity',
+    log_mine_title:'My log', table_activity:'Activity', table_hours:'Hours', table_date:'Date', table_note:'Note',
+    table_empty_noname:'Enter your name above to see your log', table_empty_nodata:'No hours logged yet',
+    cert_title:'Digital volunteer passport',
+    cert_kicker:"People's Democratic Republic of Algeria — Directorate of Youth and Sports, Oran Province",
+    cert_heading:'Volunteer Passport',
+    cert_body:'Certifies that the named volunteer has contributed personal effort to serving their community through the volunteering initiatives documented on this platform.',
+    cert_hours_label:'volunteer hours', cert_acts_label:'completed activities', cert_print:'Download / print passport', cert_name_placeholder:'Enter your name above',
+    board_title:'Volunteer leaderboard',
+    board_note:'This board is shared among all users of this demo version of the platform.',
+    board_empty:'No volunteers registered yet. Be the first to join!', board_hours_suffix:'h',
+    footer_text:'Demo platform — project submitted to the provincial qualifiers of the National Hackathon for Innovation in Volunteer Work, Oran 2026',
+    msg_need_name:'Please enter your name above first.',
+    msg_pin_required:'Please enter a 4-digit PIN.',
+    msg_pin_wrong:'This name is already registered with a different PIN. Check your PIN or use another name.',
+    msg_join_success:"You've successfully joined the activity. Don't forget to log your hours afterward!",
+    msg_already_joined:"You've already joined this activity.",
+    msg_log_success:'Your hours were logged successfully. Check out your volunteer passport!',
+    msg_invalid_hours:'Please enter a valid number of hours.',
+    badge_30:'Volunteering Champion', badge_15:'Volunteering Ambassador', badge_5:'Active Volunteer', badge_0:'Beginner Volunteer',
+    storage_note:"Data is saved locally in this browser since the site is hosted outside Claude.",
+  },
+};
+
+let currentLang = 'ar';
+function T(key){ return I18N[currentLang][key] ?? key; }
+
+/* Opportunities — fixed IDs, translated content */
+const OPPS_I18N = {
+  ar: [
+    { id:'o1', title:'تنظيف شاطئ عين الترك', muni:'عين الترك', date:'14 سبتمبر 2026', spots:30, desc:'حملة تنظيف جماعية للشاطئ بالتعاون مع جمعيات بيئية محلية، مع فرز النفايات القابلة لإعادة التدوير.' },
+    { id:'o2', title:'ورشة إعادة تدوير للأطفال', muni:'وهران وسط', date:'18 سبتمبر 2026', spots:15, desc:'إشراف على ورشة تعليمية لأطفال الحي حول تحويل النفايات المنزلية إلى ألعاب وأدوات بسيطة.' },
+    { id:'o3', title:'مرافقة كبار السن', muni:'بئر الجير', date:'20 سبتمبر 2026', spots:12, desc:'زيارات دورية لدار المسنين لتقديم الصحبة والمساعدة في الأنشطة الترفيهية اليومية.' },
+    { id:'o4', title:'رقمنة أرشيف جمعية محلية', muni:'السانية', date:'22 سبتمبر 2026', spots:6, desc:'مساعدة جمعية محلية في تصوير وأرشفة وثائقها الورقية القديمة رقمياً.' },
+    { id:'o5', title:'حملة توعية بيئية بالأسواق', muni:'بطيوة', date:'25 سبتمبر 2026', spots:20, desc:'توزيع مطويات توعوية والتحدث مع التجار والزبائن حول تقليل استعمال الأكياس البلاستيكية.' },
+  ],
+  fr: [
+    { id:'o1', title:"Nettoyage de la plage d'Aïn El Turck", muni:'Aïn El Turck', date:'14 septembre 2026', spots:30, desc:"Campagne de nettoyage collective de la plage en partenariat avec des associations environnementales locales, avec tri des déchets recyclables." },
+    { id:'o2', title:'Atelier de recyclage pour enfants', muni:'Oran Centre', date:'18 septembre 2026', spots:15, desc:"Encadrement d'un atelier éducatif pour les enfants du quartier sur la transformation des déchets ménagers en jouets et outils simples." },
+    { id:'o3', title:'Accompagnement des personnes âgées', muni:'Bir El Djir', date:'20 septembre 2026', spots:12, desc:'Visites régulières à la maison de retraite pour offrir de la compagnie et aider aux activités récréatives quotidiennes.' },
+    { id:'o4', title:"Numérisation des archives d'une association", muni:'Es Senia', date:'22 septembre 2026', spots:6, desc:"Aider une association locale à photographier et archiver numériquement ses anciens documents papier." },
+    { id:'o5', title:'Campagne de sensibilisation environnementale', muni:'Boutlelis', date:'25 septembre 2026', spots:20, desc:"Distribution de dépliants de sensibilisation et échanges avec les commerçants et clients sur la réduction de l'usage des sacs plastiques." },
+  ],
+  en: [
+    { id:'o1', title:"Aïn El Turck beach cleanup", muni:'Aïn El Turck', date:'September 14, 2026', spots:30, desc:'A collective beach cleanup campaign in partnership with local environmental associations, including sorting of recyclable waste.' },
+    { id:'o2', title:'Recycling workshop for children', muni:'Oran Center', date:'September 18, 2026', spots:15, desc:'Supervising an educational workshop for neighborhood children on turning household waste into toys and simple tools.' },
+    { id:'o3', title:'Elderly companionship visits', muni:'Bir El Djir', date:'September 20, 2026', spots:12, desc:'Regular visits to the retirement home to provide companionship and help with daily recreational activities.' },
+    { id:'o4', title:"Digitizing a local association's archive", muni:'Es Senia', date:'September 22, 2026', spots:6, desc:"Helping a local association photograph and digitally archive its old paper documents." },
+    { id:'o5', title:'Environmental awareness campaign at markets', muni:'Boutlelis', date:'September 25, 2026', spots:20, desc:'Distributing awareness leaflets and talking with vendors and customers about reducing plastic bag use.' },
+  ],
+};
+function OPPS(){ return OPPS_I18N[currentLang]; }
+function findOpp(id){ return OPPS().find(o=>o.id===id); }
+
+const BADGE_LEVELS = [
+  { min:30, key:'badge_30' },
+  { min:15, key:'badge_15' },
+  { min:5,  key:'badge_5'  },
+  { min:0,  key:'badge_0'  },
+];
+function getBadgeLabel(hours){
+  for(const b of BADGE_LEVELS){ if(hours >= b.min) return T(b.key); }
+  return T('badge_0');
+}
+
+/* =========================== storage (Claude artifact or localStorage fallback) =========================== */
+const STORAGE_KEY = 'tatawwu-data';
+const usingFallback = (typeof window.storage === 'undefined');
+
+async function storageGet(key, shared){
+  if(!usingFallback){
+    try{ return await window.storage.get(key, shared); }catch(e){ return null; }
+  }
+  try{
+    const v = localStorage.getItem(key);
+    return v ? { key, value:v, shared } : null;
+  }catch(e){ return null; }
+}
+async function storageSet(key, value, shared){
+  if(!usingFallback){
+    try{ return await window.storage.set(key, value, shared); }catch(e){ return null; }
+  }
+  try{ localStorage.setItem(key, value); return { key, value, shared }; }catch(e){ return null; }
+}
+
+let DATA = { volunteers: {}, logs: [], seeded: false };
+
+function seedDemoData(){
+  const seed = [
+    { key:'sara hamdi',      name:'سارة حمدي',        muni:'وهران وسط', pin:'0000', hours:22, activities:3, joined:['o2','o5'] },
+    { key:'youcef mrabet',   name:'يوسف مرابط',       muni:'بئر الجير',  pin:'0000', hours:14, activities:2, joined:['o3'] },
+    { key:'iman bouzid',     name:'إيمان بوزيد',       muni:'السانية',    pin:'0000', hours:9,  activities:2, joined:['o4'] },
+    { key:'abderrahmane k.', name:'عبد الرحمن قدور',   muni:'عين الترك',  pin:'0000', hours:31, activities:5, joined:['o1'] },
+    { key:'nour el houda',   name:'نور الهدى شريف',    muni:'بطيوة',      pin:'0000', hours:5,  activities:1, joined:['o5'] },
+  ];
+  seed.forEach(s=>{
+    DATA.volunteers[s.key] = { name:s.name, muni:s.muni, pin:s.pin, joined:s.joined, hours:s.hours, activities:s.activities };
+    DATA.logs.push({ volKey:s.key, name:s.name, activityId:s.joined[0], hours:s.hours, date:'2026-09-10', note:'' });
+  });
+  DATA.seeded = true;
+}
+
+function todayStr(){ return new Date().toISOString().split('T')[0]; }
+function currentName(){ return document.getElementById('idName').value.trim(); }
+function currentMuni(){ return document.getElementById('idMuni').value.trim(); }
+function currentPin(){ return document.getElementById('idPin').value.trim(); }
+function volKey(name){ return name.trim().toLowerCase(); }
+
+function showMsg(text, type){
+  const box = document.getElementById('msgBox');
+  box.innerHTML = `<div class="msg ${type}">${text}</div>`;
+  setTimeout(()=>{ box.innerHTML=''; }, 3800);
+}
+
+async function loadData(){
+  const res = await storageGet(STORAGE_KEY, true);
+  if(res && res.value){
+    try{ DATA = JSON.parse(res.value); }catch(e){ DATA = { volunteers:{}, logs:[], seeded:false }; }
+  }
+  if(!DATA.seeded){
+    seedDemoData();
+    await saveData();
+  }
+  const note = document.getElementById('storageNote');
+  if(usingFallback){
+    note.style.display = 'block';
+    note.textContent = T('storage_note');
+  } else {
+    note.style.display = 'none';
+  }
+  render();
+}
+
+async function saveData(){
+  const res = await storageSet(STORAGE_KEY, JSON.stringify(DATA), true);
+  if(!res){ showMsg(currentLang==='ar' ? 'تعذّر حفظ البيانات، حاول مجدداً.' : (currentLang==='fr' ? "Échec de l'enregistrement, réessayez." : 'Could not save data, try again.'), 'err'); }
+}
+
+function ensureVolunteer(){
+  const name = currentName();
+  const pin = currentPin();
+  if(!name){ showMsg(T('msg_need_name'), 'err'); return null; }
+  if(!/^\d{4}$/.test(pin)){ showMsg(T('msg_pin_required'), 'err'); return null; }
+  const key = volKey(name);
+  if(!DATA.volunteers[key]){
+    DATA.volunteers[key] = { name, muni: currentMuni() || '—', pin, joined: [], hours: 0, activities: 0 };
+  } else {
+    if(DATA.volunteers[key].pin !== pin){ showMsg(T('msg_pin_wrong'), 'err'); return null; }
+    if(currentMuni()) DATA.volunteers[key].muni = currentMuni();
+  }
+  return DATA.volunteers[key];
+}
+
+function joinOpportunity(oppId){
+  const v = ensureVolunteer();
+  if(!v) return;
+  const key = volKey(currentName());
+  if(!v.joined.includes(oppId)){
+    v.joined.push(oppId);
+    saveData().then(render);
+    showMsg(T('msg_join_success'), 'ok');
+  } else {
+    showMsg(T('msg_already_joined'), 'err');
+  }
+}
+
+function logHours(){
+  const v = ensureVolunteer();
+  if(!v) return;
+  const activitySel = document.getElementById('logActivity');
+  const activityId = activitySel.value;
+  const hours = parseFloat(document.getElementById('logHours').value);
+  const date = document.getElementById('logDate').value || todayStr();
+  const note = document.getElementById('logNote').value.trim();
+
+  if(!hours || hours <= 0){
+    showMsg(T('msg_invalid_hours'), 'err');
+    return;
+  }
+
+  const key = volKey(currentName());
+  DATA.logs.push({ volKey:key, name:v.name, activityId, hours, date, note });
+  v.hours = Math.round((v.hours + hours) * 100) / 100;
+  v.activities += 1;
+
+  document.getElementById('logHours').value = '';
+  document.getElementById('logNote').value = '';
+
+  saveData().then(render);
+  showMsg(T('msg_log_success'), 'ok');
+}
+
+/* =========================== render =========================== */
+function applyStaticI18n(){
+  document.querySelectorAll('[data-i18n]').forEach(el=>{
+    const key = el.getAttribute('data-i18n');
+    el.innerHTML = T(key);
+  });
+  document.querySelectorAll('[data-i18n-placeholder]').forEach(el=>{
+    const key = el.getAttribute('data-i18n-placeholder');
+    el.setAttribute('placeholder', T(key));
+  });
+  document.getElementById('htmlRoot').setAttribute('lang', I18N[currentLang].htmlLang);
+  document.getElementById('htmlRoot').setAttribute('dir', I18N[currentLang].dir);
+  document.querySelectorAll('.langswitch button').forEach(b=>{
+    b.classList.toggle('active', b.dataset.lang === currentLang);
+  });
+}
+
+function render(){
+  applyStaticI18n();
+  renderStats();
+  renderOpps();
+  renderLogSelect();
+  renderLogTable();
+  renderCert();
+  renderBoard();
+}
+
+function renderStats(){
+  const vols = Object.values(DATA.volunteers);
+  const totalHours = vols.reduce((s,v)=>s+v.hours,0);
+  document.getElementById('statVol').textContent = vols.length;
+  document.getElementById('statHours').textContent = Math.round(totalHours*10)/10;
+  document.getElementById('statOpps').textContent = OPPS().length;
+}
+
+function renderOpps(){
+  const name = currentName();
+  const key = volKey(name);
+  const v = DATA.volunteers[key];
+  const list = document.getElementById('oppsList');
+  list.innerHTML = OPPS().map(o=>{
+    const joined = v && v.joined.includes(o.id);
+    return `
+      <div class="card">
+        <h3>${o.title}</h3>
+        <div class="meta"><span>📍 ${o.muni}</span><span>📅 ${o.date}</span><span>👥 ${o.spots} ${T('opp_spots')}</span></div>
+        <p>${o.desc}</p>
+        <div class="card-foot">
+          <span class="tag">${joined ? T('opp_joined_tag') : T('opp_open_tag')}</span>
+          <button class="btn ${joined?'ghost':''}" ${joined?'disabled':''} onclick="joinOpportunity('${o.id}')">${joined?T('opp_joined_btn'):T('opp_join')}</button>
+        </div>
+      </div>`;
+  }).join('');
+}
+
+function renderLogSelect(){
+  const sel = document.getElementById('logActivity');
+  const name = currentName();
+  const key = volKey(name);
+  const v = DATA.volunteers[key];
+  const joinedOpps = v ? OPPS().filter(o=>v.joined.includes(o.id)) : [];
+  const options = joinedOpps.map(o=>`<option value="${o.id}">${o.title}</option>`).join('');
+  sel.innerHTML = options + `<option value="other">${T('log_other_option')}</option>`;
+  if(!document.getElementById('logDate').value){
+    document.getElementById('logDate').value = todayStr();
+  }
+}
+
+function renderLogTable(){
+  const name = currentName();
+  const key = volKey(name);
+  const rows = DATA.logs.filter(l=>l.volKey===key);
+  const tbody = document.getElementById('logTableBody');
+  if(!name){
+    tbody.innerHTML = `<tr><td colspan="4" class="empty">${T('table_empty_noname')}</td></tr>`;
+    return;
+  }
+  if(rows.length===0){
+    tbody.innerHTML = `<tr><td colspan="4" class="empty">${T('table_empty_nodata')}</td></tr>`;
+    return;
+  }
+  tbody.innerHTML = rows.slice().reverse().map(r=>{
+    const opp = findOpp(r.activityId);
+    const label = opp ? opp.title : T('log_other_option');
+    return `<tr><td>${label}</td><td>${r.hours}</td><td>${r.date}</td><td>${r.note||'—'}</td></tr>`;
+  }).join('');
+}
+
+function renderCert(){
+  const name = currentName();
+  const key = volKey(name);
+  const v = DATA.volunteers[key];
+  document.getElementById('certName').textContent = name || T('cert_name_placeholder');
+  document.getElementById('certHours').textContent = v ? v.hours : 0;
+  document.getElementById('certActs').textContent = v ? v.activities : 0;
+  document.getElementById('certBadge').textContent = v ? getBadgeLabel(v.hours) : '—';
+}
+
+function renderBoard(){
+  const vols = Object.values(DATA.volunteers).sort((a,b)=>b.hours-a.hours).slice(0,10);
+  const board = document.getElementById('boardList');
+  if(vols.length===0){
+    board.innerHTML = `<div class="empty">${T('board_empty')}</div>`;
+    return;
+  }
+  board.innerHTML = vols.map((v,i)=>`
+    <div class="lb-row">
+      <div class="lb-rank ${i===0?'gold':''}">${i+1}</div>
+      <div class="lb-name">${v.name}<div class="lb-muni">${v.muni}</div></div>
+      <div class="lb-hours">${v.hours} ${T('board_hours_suffix')}</div>
+    </div>
+  `).join('');
+}
+
+/* =========================== events =========================== */
+document.getElementById('nav').addEventListener('click', (e)=>{
+  const btn = e.target.closest('button');
+  if(!btn) return;
+  document.querySelectorAll('#nav button').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+  document.getElementById('panel-'+btn.dataset.panel).classList.add('active');
+  render();
+});
+
+document.getElementById('langSwitch').addEventListener('click', (e)=>{
+  const btn = e.target.closest('button');
+  if(!btn) return;
+  currentLang = btn.dataset.lang;
+  render();
+});
+
+document.getElementById('logSubmit').addEventListener('click', logHours);
+document.getElementById('printCert').addEventListener('click', ()=>window.print());
+document.getElementById('idName').addEventListener('change', render);
+document.getElementById('idMuni').addEventListener('change', render);
+document.getElementById('idPin').addEventListener('input', (e)=>{
+  e.target.value = e.target.value.replace(/\D/g,'').slice(0,4);
+});
+
+loadData();
+</script>
+
+</body>
+</html>
